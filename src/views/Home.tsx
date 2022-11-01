@@ -47,8 +47,9 @@ export const Home = ({ groups, listMyGroups, joinOrCreate }: HomeProps) => {
       </div>
       {groups.map(({ groupName, groupId }) => {
         return (
-          <div>
+          <div key={groupId}>
             <h2>{groupName}</h2>
+            <h2>{groupId}</h2>
             <Link to={`group/${groupId}`}>Open Chat</Link>
           </div>
         );

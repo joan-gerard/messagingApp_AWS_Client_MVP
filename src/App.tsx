@@ -21,16 +21,15 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
   const websocketConnect = async () => {
     if (socket) return;
     const user = await Auth.currentSession();
+    console.log({ user });
     const token = user.getIdToken().getJwtToken();
 
     const ws = new WebSocket(websocketUrl + `?token=${token}`);
 
     setSocket(ws);
-    console.log("createing websocket Fn");
   };
 
   useEffect(() => {
-    console.log("creating websocket Use Effect");
     websocketConnect();
   }, []);
 
@@ -38,7 +37,6 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
     const data = {
       action: "listMyGroups",
     };
-    console.log("listing groups");
     socket?.send(JSON.stringify(data));
     return;
   };
@@ -48,7 +46,6 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
   });
 
   socket?.addEventListener("message", function (event) {
-    console.log("message Received ", event.data);
     try {
       const messageData = JSON.parse(event.data);
       console.log("messageData", messageData);

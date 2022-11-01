@@ -97,6 +97,7 @@ export const MessageInterface = ({
 
   useEffect(() => {
     fetchGroupInitial();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -151,7 +152,7 @@ export const MessageInterface = ({
       </div>
       <div className="messageView">
         {(messages[id!] || []).map((data) => {
-          if (data.type == "message" && data.mine) {
+          if (data.type === "message" && data.mine) {
             return <div className={`message right`}>{data.message}</div>;
           } else {
             const { from, message } = data as UserMessage;
@@ -216,7 +217,7 @@ const JoinRequests = ({
           <div>
             {joinRequests.map(
               ({ userName, id: requestId, userId, groupId }) => (
-                <div>
+                <div key={userId}>
                   <span>{userName}</span>
                   <button
                     onClick={() =>
