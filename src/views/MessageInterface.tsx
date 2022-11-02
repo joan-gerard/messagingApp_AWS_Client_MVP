@@ -151,13 +151,20 @@ export const MessageInterface = ({
         </div>
       </div>
       <div className="messageView">
-        {(messages[id!] || []).map((data) => {
+        {(messages[id!] || []).map((data, idx) => {
           if (data.type === "message" && data.mine) {
-            return <div className={`message right`}>{data.message}</div>;
+            return (
+              <div key={idx} className={`message right`}>
+                {data.message}
+              </div>
+            );
           } else {
             const { from, message } = data as UserMessage;
             return (
-              <div className={`message left`}>{`${from} - ${message}`}</div>
+              <div
+                key={idx}
+                className={`message left`}
+              >{`${from} - ${message}`}</div>
             );
           }
         })}
@@ -229,7 +236,16 @@ const JoinRequests = ({
                   >
                     Accept
                   </button>
-                  <button>Reject</button>
+                  <button
+                    onClick={() =>
+                      handleRequest({
+                        action: "rejectJoinRequest",
+                        requestId,
+                      })
+                    }
+                  >
+                    Reject
+                  </button>
                 </div>
               )
             )}
