@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GroupDetails } from "../types";
+import { AiFillWechat } from "react-icons/ai";
 import { CreateGroup } from "./CreateGroup";
 import { JoinGroup } from "./JoinGroup";
 
@@ -40,17 +40,19 @@ export const Home = ({ groups, listMyGroups, joinOrCreate }: HomeProps) => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="group__nav">
+      <div className="joinOrCreateGroup-container">
         <JoinGroup onSubmit={joinGroup} />
         <CreateGroup onSubmit={createGroup} />
       </div>
       {groups.map(({ groupName, groupId }) => {
         return (
-          <div key={groupId}>
+          <div key={groupId} className="group__name">
             <h2>{groupName}</h2>
-            <h2>{groupId}</h2>
-            <Link to={`group/${groupId}`}>Open Chat</Link>
+            {/* <h2>{groupId}</h2> */}
+            <Link to={`group/${groupId}`}>
+              <AiFillWechat />
+            </Link>
           </div>
         );
       })}

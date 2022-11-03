@@ -27,9 +27,7 @@ export const JoinGroup = ({ onSubmit }: Props) => {
         </div>
         <button onClick={() => join()}>Join</button>
       </Modal>
-      <button onClick={() => setShowModal(true)} style={{ marginLeft: "15px" }}>
-        Join Existing Group
-      </button>
+      <button onClick={() => setShowModal(true)} className="joinGroup-button">Join Group</button>
     </>
   );
 };

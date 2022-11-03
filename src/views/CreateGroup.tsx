@@ -33,8 +33,8 @@ export const CreateGroup = ({ onSubmit }: Props) => {
         </div>
         <button onClick={() => create()}>Create</button>
       </Modal>
-      <button onClick={() => setShowModal(true)} style={{ marginLeft: "15px" }}>
-        Create New Group
+      <button onClick={() => setShowModal(true)} className="createGroup-button">
+        Create Group
       </button>
     </>
   );

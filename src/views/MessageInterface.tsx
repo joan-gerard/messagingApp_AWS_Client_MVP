@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Avatar } from "../components/avatar";
 import { Modal } from "../components/Modal";
-import { Message, MessageHistory, UserMessage } from "../types";
 import API from "../utils/API";
 
 export const MessageInterface = ({

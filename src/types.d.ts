@@ -1,20 +1,20 @@
-export interface GroupDetails {
+interface GroupDetails {
   groupId: string;
   groupName: string;
 }
 
-export type Message = UserMessage | InfoMessage | GroupDataMessage;
+type Message = UserMessage | InfoMessage | GroupDataMessage;
 
-export interface InfoMessage {
+interface InfoMessage {
   type: "info";
   message: string;
 }
-export interface GroupDataMessage {
+interface GroupDataMessage {
   type: "groupData";
   data: GroupDetails[];
 }
 
-export interface UserMessage {
+interface UserMessage {
   type: "message";
   message: string;
   from: string;
@@ -22,6 +22,28 @@ export interface UserMessage {
   mine?: boolean;
 }
 
-export interface MessageHistory {
+interface MessageHistory {
   messages: UserMessage[];
 }
+
+// App.tsx - start
+type JoinOrCreateParams = {
+  action: string;
+  groupName?: string;
+  groupId?: string;
+};
+type SendMessageParams = {
+  message: string;
+  groupId: string;
+};
+type HandleRequestParams = {
+  action: "acceptJoinRequest" | "rejectJoinRequest";
+  requestId: string;
+  groupId: string;
+  userId: string;
+};
+type SetInitialMessagesParams = {
+  initialMessages: any[];
+  groupId: string;
+};
+// App.tsx - end

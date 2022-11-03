@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
-
 import { Auth } from "aws-amplify";
-import "./App.css";
+import { Button } from "@aws-amplify/ui-react";
 import { Route, Link, Routes } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { Home } from "./views/Home";
 import { MessageInterface } from "./views/MessageInterface";
-import { Button } from "@aws-amplify/ui-react";
+import "./App.css";
 
 const websocketUrl = process.env.REACT_APP_WS_URL;
 
 function App(props: { signOut: ((data?: any) => void) | undefined }) {
   const [messages, setMessages] = useState<Record<string, any[]>>({});
   const [socket, setSocket] = useState<WebSocket>();
-  const [groups, setGroups] = useState<
-    { groupId: string; groupName: string }[]
-  >([]);
+  const [groups, setGroups] = useState<GroupDetails[]>([]);
 
   const websocketConnect = async () => {
     if (socket) return;
     const user = await Auth.currentSession();
-    console.log({ user });
     const token = user.getIdToken().getJwtToken();
 
     const ws = new WebSocket(websocketUrl + `?token=${token}`);
@@ -82,24 +79,14 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
     setSocket(undefined);
   });
 
-  const joinOrCreate = (data: {
-    action: string;
-    groupName?: string;
-    groupId?: string;
-  }) => {
+  const joinOrCreate = (data: JoinOrCreateParams) => {
     socket?.send(JSON.stringify(data));
     setTimeout(() => {
       listMyGroups();
     }, 4000);
   };
 
-  const sendMessage = ({
-    message,
-    groupId,
-  }: {
-    message: string;
-    groupId: string;
-  }) => {
+  const sendMessage = ({ message, groupId }: SendMessageParams) => {
     const data = {
       action: "message",
       message,
@@ -121,12 +108,7 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
     requestId,
     groupId,
     userId,
-  }: {
-    action: "acceptJoinRequest" | "rejectJoinRequest";
-    requestId: string;
-    groupId: string;
-    userId: string;
-  }) => {
+  }: HandleRequestParams) => {
     const data = {
       action,
       requestId,
@@ -140,10 +122,7 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
   const setInitialMessages = ({
     initialMessages,
     groupId,
-  }: {
-    initialMessages: any[];
-    groupId: string;
-  }) => {
+  }: SetInitialMessagesParams) => {
     setMessages({
       ...messages,
       [groupId]: [...initialMessages],
@@ -161,7 +140,7 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
         </>
       ) : (
         <div>
-          <nav style={{ marginBottom: "50px" }}>
+          <nav className="nav">
             <Link to="">
               <button>Home</button>
             </Link>
