@@ -10,17 +10,14 @@
 .modal-main {
   position: fixed;
   background: white;
-  width: 40%;
+  width: 80%;
   height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
   color: black;
-  padding: 1rem;
-
-  display: flex;
-  flex-direction: column;
+  padding: 10px;
 }
 
 .display-block {

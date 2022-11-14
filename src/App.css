@@ -1,45 +1,28 @@
-.nav {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  background-color: beige;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 60px;
-  z-index: 1;
-<<<<<<< HEAD
+.App {
 }
 
-.nav-right {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.nav-right p {
-  margin: 0 1rem 0 0;
-=======
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.nav-right {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.App-link {
+  color: #61dafb;
 }
 
-.nav-right p {
-  margin: 0 1rem 0 0;
-}
-
-.main {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  position: fixed;
-  top: 60px;
-  width: 100%;
->>>>>>> 5abd3cb233d94618e3e81f4545bee722c321bdc3
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .messageInterface {
@@ -48,10 +31,7 @@
   height: 800px; */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   color: white;
-  width: 85%;
-  width: calc(100% - 125px);
 }
 
 .message {
@@ -78,32 +58,17 @@
 }
 .messsageInput {
   background-color: aliceblue;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  width: calc(100% - 150px);
-=======
   width: 100%;
->>>>>>> parent of d2aa1d0 (improve layout and style)
-=======
-  width: calc(100% - 150px);
->>>>>>> 5abd3cb233d94618e3e81f4545bee722c321bdc3
   height: 50px;
   display: flex;
   padding: 5px;
-  position: fixed;
-  bottom: 0;
+  box-sizing: border-box;
 }
 .messsageInput input {
-  flex-grow: 1;
+  flex-grow: 2;
   margin-right: 5px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-.group__list {
-  padding: 1rem;
-  width: 150px;
-=======
 .nav {
   background-color: bisque;
   padding: 1rem;
@@ -113,12 +78,6 @@
 
 .group__nav {
   padding: 1rem;
->>>>>>> parent of d2aa1d0 (improve layout and style)
-=======
-.group__list {
-  padding: 1rem;
-  width: 150px;
->>>>>>> 5abd3cb233d94618e3e81f4545bee722c321bdc3
 }
 
 .group__name {
@@ -128,63 +87,10 @@
   margin: 1rem 0;
 }
 
-.group__name h4 {
-  margin: 0;
+.joinGroup-button,
+.createGroup-button {
+  padding: 0.25rem;
 }
-
-.joinOrCreateGroup-container {
-  display: flex;
-  flex-direction: column;
-  height: 80px;
-  justify-content: space-between;
-}
-
 .joinGroup-button {
-  margin-bottom: 5rem;
-}
-
-@media (max-width: 400px) {
-  .group__list {
-    background-color: red;
-    width: 5%;
-    position: absolute;
-    z-index: 2;
-  }
-  .group__list:hover {
-    background-color: green;
-    width: 25%;
-    position: absolute;
-    z-index: 2;
-  }
-
-  .messageInterface {
-    width: 100%;
-  }
-
-  .messsageInput {
-    width: 100%;
-  }
-}
-
-@media (max-width: 400px) {
-  .group__list {
-    background-color: red;
-    width: 5%;
-    position: absolute;
-    z-index: 2;
-  }
-  .group__list:hover {
-    background-color: green;
-    width: 25%;
-    position: absolute;
-    z-index: 2;
-  }
-
-  .messageInterface {
-    width: 100%;
-  }
-
-  .messsageInput {
-    width: 100%;
-  }
+  margin-right: 1rem;
 }

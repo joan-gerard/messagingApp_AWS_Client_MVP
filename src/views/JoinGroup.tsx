@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Modal } from "../components/Modal";
-import { Button } from "@aws-amplify/ui-react";
 
 interface Props {
   onSubmit: ({ action, groupId }: { action: string; groupId: string }) => void;
@@ -26,17 +25,9 @@ export const JoinGroup = ({ onSubmit }: Props) => {
           <span>Group ID</span>
           <input type="text" onChange={(e) => setGroupId(e.target.value)} />
         </div>
-        <Button size="small" onClick={() => join()}>
-          Join
-        </Button>
+        <button onClick={() => join()}>Join</button>
       </Modal>
-      <Button
-        size="small"
-        onClick={() => setShowModal(true)}
-        className="joinGroup-button"
-      >
-        Join
-      </Button>
+      <button onClick={() => setShowModal(true)} className="joinGroup-button">Join Group</button>
     </>
   );
 };

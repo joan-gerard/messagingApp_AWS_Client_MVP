@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Avatar } from "../components/avatar";
 import { Modal } from "../components/Modal";
 import API from "../utils/API";
 
 export const MessageInterface = ({
   messages,
-  viewChatID,
   sendMessage,
   setInitialMessages,
   handleRequest,
 }: {
   messages: Record<string, Message[]>;
-  viewChatID: string;
   sendMessage: ({
     message,
     groupId,
@@ -39,9 +37,8 @@ export const MessageInterface = ({
     userId: string;
   }) => void;
 }) => {
-  // const { id } = useParams();
-  // const id = viewChatID;
-  const groupId = viewChatID;
+  const { id } = useParams();
+  const groupId = id as string;
 
   const [groupDetails, setGroupDetails] = useState<GroupDetails>({
     groupName: "loading",
@@ -53,23 +50,19 @@ export const MessageInterface = ({
   const [reply, setReply] = useState("");
 
   const submit = () => {
-    sendMessage({ message: reply, groupId: viewChatID! });
+    sendMessage({ message: reply, groupId: id! });
     setReply("");
   };
 
   const fetchGroupInitial = async () => {
-    console.log("fetchGroupInitial", { groupId });
     // get group members
     const groupDetails = await API.get<GroupDetails>({
       path: `/group/${groupId}`,
     });
-    console.log({ groupDetails });
-
     setGroupDetails(groupDetails);
     // get recent messages
     fetchMessages({});
   };
-  console.log({ groupDetails });
 
   const fetchMessages = async ({
     lastToken,
@@ -104,7 +97,7 @@ export const MessageInterface = ({
   useEffect(() => {
     fetchGroupInitial();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [viewChatID]);
+  }, []);
 
   useEffect(() => {
     const elements = document.getElementsByClassName("messageView")!;
@@ -146,7 +139,6 @@ export const MessageInterface = ({
     <div className="messageInterface">
       <div>
         <h2>{groupDetails.groupName}</h2>
-        <p>{groupDetails.id}</p>
         <div>
           {groupDetails.members.map((member, i) => (
             <Avatar key={i} fullName={member.userName} />
@@ -158,7 +150,7 @@ export const MessageInterface = ({
         </div>
       </div>
       <div className="messageView">
-        {(messages[viewChatID!] || []).map((data, idx) => {
+        {(messages[id!] || []).map((data, idx) => {
           if (data.type === "message" && data.mine) {
             return (
               <div key={idx} className={`message right`}>

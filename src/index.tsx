@@ -17,47 +17,9 @@ const root = ReactDOM.createRoot(
 
 Amplify.configure(awsExports);
 
-const formFields = {
-  signUp: {
-    // component
-    // email: {
-    //   order: 1,
-    //   labelHidden: true,
-    //   placeholder: "email ph",
-    //   isRequired: true,
-    //   label: "email label:",
-    // },
-    family_name: {
-      order: 2,
-      labelHidden: true,
-      placeholder: "Username",
-      isRequired: true,
-      label: "",
-    },
-    password: {
-      order: 5,
-    },
-    confirm_password: {
-      order: 6,
-    },
-    username: {
-      order: 3,
-      labelHidden: true,
-      placeholder: "Email",
-      isRequired: true,
-      label: "",
-    },
-  },
-};
-
 root.render(
   <BrowserRouter>
-    <Authenticator
-      formFields={formFields}
-      socialProviders={["amazon", "apple", "facebook", "google"]}
-    >
-      {({ signOut, user }) => <App signOut={signOut} user={user} />}
-    </Authenticator>
+    <Authenticator>{({ signOut }) => <App signOut={signOut} />}</Authenticator>
   </BrowserRouter>
 );
 
