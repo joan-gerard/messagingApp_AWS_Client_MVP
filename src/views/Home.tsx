@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { AiFillWechat } from "react-icons/ai";
 import { CreateGroup } from "./CreateGroup";
 import { JoinGroup } from "./JoinGroup";
+import { Button, Text } from "@aws-amplify/ui-react";
 
 interface HomeProps {
   groups: GroupDetails[];
@@ -11,9 +12,15 @@ interface HomeProps {
     groupName?: string;
     groupId?: string;
   }) => void;
+  setViewChatID: (groupId: string) => void;
 }
 
-export const Home = ({ groups, listMyGroups, joinOrCreate }: HomeProps) => {
+export const Home = ({
+  groups,
+  listMyGroups,
+  joinOrCreate,
+  setViewChatID,
+}: HomeProps) => {
   const joinGroup = ({
     action,
     groupId,
@@ -40,23 +47,30 @@ export const Home = ({ groups, listMyGroups, joinOrCreate }: HomeProps) => {
   };
 
   return (
-    <div className="group__nav">
+    <div className="group__list">
       <div className="joinOrCreateGroup-container">
         <JoinGroup onSubmit={joinGroup} />
         <CreateGroup onSubmit={createGroup} />
       </div>
+      <Text variation="tertiary" className="">Your groups:</Text>
       {groups.map(({ groupName, groupId }) => {
         return (
-          <div key={groupId} className="group__name">
-            <h2>{groupName}</h2>
+          <div
+            key={groupId}
+            className="group__name"
+            onClick={() => setViewChatID(groupId)}
+          >
+            <h4>{groupName}</h4>
             {/* <h2>{groupId}</h2> */}
-            <Link to={`group/${groupId}`}>
+            {/* <Link to={`group/${groupId}`}>
               <AiFillWechat />
-            </Link>
+            </Link> */}
           </div>
         );
       })}
-      <button onClick={listMyGroups}>Refresh Group</button>
+      {/* <button onClick={listMyGroups}>Refresh Group</button> */}
     </div>
   );
 };
+
+// start
