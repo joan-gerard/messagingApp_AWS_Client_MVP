@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
-import { Button, MenuItem, Menu, Divider } from "@aws-amplify/ui-react";
-import { Route, Link, Routes } from "react-router-dom";
+import { MenuItem, Menu } from "@aws-amplify/ui-react";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { AuthEventData, AmplifyUser } from "@aws-amplify/ui";
@@ -48,6 +48,7 @@ function App(props: {
 
   useEffect(() => {
     websocketConnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const listMyGroups = () => {
@@ -166,12 +167,14 @@ function App(props: {
             <Link to="">
               <button>Home</button>
             </Link>
-            <p>Hi, {userName}</p>
-            <div>
-              <Menu menuAlign="start">
-                <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
-                <MenuItem onClick={deleteUser}>Delete Account</MenuItem>
-              </Menu>
+            <div className="nav-right">
+              <p>Hi, {userName}</p>
+              <div>
+                <Menu menuAlign="start">
+                  <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
+                  <MenuItem onClick={deleteUser}>Delete Account</MenuItem>
+                </Menu>
+              </div>
             </div>
           </nav>
           <div className="main">
