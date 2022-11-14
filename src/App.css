@@ -25,13 +25,25 @@
   }
 }
 
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  position: fixed;
+  top: 60px;
+  width: 100%;
+}
+
 .messageInterface {
   background: #393f49;
   /* width: 600px;
   height: 800px; */
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   color: white;
+  width: 85%;
+  width: calc(100% - 125px);
 }
 
 .message {
@@ -58,11 +70,12 @@
 }
 .messsageInput {
   background-color: aliceblue;
-  width: 100%;
+  width: calc(100% - 125px);
   height: 50px;
   display: flex;
   padding: 5px;
-  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
 }
 .messsageInput input {
   flex-grow: 2;
@@ -70,14 +83,24 @@
 }
 
 .nav {
-  background-color: bisque;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  background-color: beige;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1;
 }
 
-.group__nav {
+.nav p {
+  margin: 0;
+}
+
+.group__list {
   padding: 1rem;
+  width: 125px;
 }
 
 .group__name {
@@ -87,10 +110,17 @@
   margin: 1rem 0;
 }
 
-.joinGroup-button,
-.createGroup-button {
-  padding: 0.25rem;
+.group__name h4 {
+  margin: 0;
 }
+
+.joinOrCreateGroup-container {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-between;
+}
+
 .joinGroup-button {
-  margin-right: 1rem;
+  margin-bottom: 5rem;
 }

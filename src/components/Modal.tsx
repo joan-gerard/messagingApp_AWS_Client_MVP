@@ -1,4 +1,5 @@
 import "./Modal.css";
+import { Button } from "@aws-amplify/ui-react";
 
 export const Modal = ({ handleClose, show, children }: any) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
@@ -7,9 +8,9 @@ export const Modal = ({ handleClose, show, children }: any) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         {children}
-        <button type="button" onClick={handleClose}>
+        <Button size="small" onClick={handleClose}>
           Close
-        </button>
+        </Button>
       </section>
     </div>
   );

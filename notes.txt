@@ -1,0 +1,12 @@
+setInitialMessages --> query data
+
+useEffect
+fetchGroupInitial : API.get and set groupDetails using http endpoint
+fetchMessages : API.get and set message history using http endpoint
+setInitialMessages 
+setMessages (in App.tsx) 
+
+sendMessage --> triggers lambda and write tp Dynamo
+
+submit (MessageInterface)
+sendMessage (in App.tsx) : socket.send 

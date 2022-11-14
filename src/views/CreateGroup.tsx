@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal } from "../components/Modal";
+import { Button } from "@aws-amplify/ui-react";
 
 interface Props {
   onSubmit: ({
@@ -31,11 +32,15 @@ export const CreateGroup = ({ onSubmit }: Props) => {
           <span>Group Name</span>
           <input type="text" onChange={(e) => setName(e.target.value)} />
         </div>
-        <button onClick={() => create()}>Create</button>
+        <Button onClick={() => create()}>Create</Button>
       </Modal>
-      <button onClick={() => setShowModal(true)} className="createGroup-button">
-        Create Group
-      </button>
+      <Button
+        size="small"
+        onClick={() => setShowModal(true)}
+        className="createGroup-button"
+      >
+        Create
+      </Button>
     </>
   );
 };
