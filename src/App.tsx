@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
+<<<<<<< HEAD
+import { MenuItem, Menu } from "@aws-amplify/ui-react";
+import { Link } from "react-router-dom";
+=======
 import { Button } from "@aws-amplify/ui-react";
 import { Route, Link, Routes } from "react-router-dom";
+>>>>>>> parent of d2aa1d0 (improve layout and style)
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,6 +33,7 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
 
   useEffect(() => {
     websocketConnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const listMyGroups = () => {
@@ -144,7 +150,19 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
             <Link to="">
               <button>Home</button>
             </Link>
+<<<<<<< HEAD
+            <div className="nav-right">
+              <p>Hi, {userName}</p>
+              <div>
+                <Menu menuAlign="start">
+                  <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
+                  <MenuItem onClick={deleteUser}>Delete Account</MenuItem>
+                </Menu>
+              </div>
+            </div>
+=======
             <button onClick={props.signOut}>Sign Out</button>
+>>>>>>> parent of d2aa1d0 (improve layout and style)
           </nav>
           <Routes>
             <Route
