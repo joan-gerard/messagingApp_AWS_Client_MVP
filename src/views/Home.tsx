@@ -45,17 +45,20 @@ export const Home = ({ groups, listMyGroups, joinOrCreate }: HomeProps) => {
         <JoinGroup onSubmit={joinGroup} />
         <CreateGroup onSubmit={createGroup} />
       </div>
-      {groups.map(({ groupName, groupId }) => {
-        return (
-          <div key={groupId} className="group__name">
-            <h2>{groupName}</h2>
-            {/* <h2>{groupId}</h2> */}
-            <Link to={`group/${groupId}`}>
-              <AiFillWechat />
-            </Link>
-          </div>
-        );
-      })}
+      <div className="all-groups">
+        {groups.map(({ groupName, groupId }) => {
+          return (
+            <div key={groupId} className="group__name">
+              <h2>{groupName}</h2>
+              <p>{groupId}</p>
+              {/* <h2>{groupId}</h2> */}
+              <Link to={`group/${groupId}`}>
+                <AiFillWechat />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
       <button onClick={listMyGroups}>Refresh Group</button>
     </div>
   );

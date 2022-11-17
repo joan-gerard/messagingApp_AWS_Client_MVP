@@ -41,6 +41,7 @@ type HandleRequestParams = {
   requestId: string;
   groupId: string;
   userId: string;
+  family_name: string;
 };
 type SetInitialMessagesParams = {
   initialMessages: any[];

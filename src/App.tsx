@@ -20,6 +20,7 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
     if (socket) return;
     const user = await Auth.currentSession();
     const token = user.getIdToken().getJwtToken();
+    console.log({ user });
 
     const ws = new WebSocket(websocketUrl + `?token=${token}`);
 
@@ -108,12 +109,14 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
     requestId,
     groupId,
     userId,
+    family_name
   }: HandleRequestParams) => {
     const data = {
       action,
       requestId,
       groupId,
       userId,
+      family_name,
     };
 
     socket?.send(JSON.stringify(data));
@@ -131,6 +134,15 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
     console.log({ storedMessages: messages });
   };
 
+  async function deleteUser() {
+    try {
+      const result = await Auth.deleteUser();
+      console.log(result);
+    } catch (error) {
+      console.log("Error deleting user", error);
+    }
+  }
+
   return (
     <div className="App">
       <ToastContainer />
@@ -145,6 +157,7 @@ function App(props: { signOut: ((data?: any) => void) | undefined }) {
               <button>Home</button>
             </Link>
             <button onClick={props.signOut}>Sign Out</button>
+            <button onClick={() => deleteUser()}>Delete User</button>
           </nav>
           <Routes>
             <Route

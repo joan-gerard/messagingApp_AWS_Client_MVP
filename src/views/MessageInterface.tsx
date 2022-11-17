@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Avatar } from "../components/avatar";
+import { Avatar } from "../components/Avatar";
 import { Modal } from "../components/Modal";
 import API from "../utils/API";
 
@@ -30,11 +30,15 @@ export const MessageInterface = ({
     requestId,
     groupId,
     userId,
+    family_name
+
   }: {
     action: "acceptJoinRequest" | "rejectJoinRequest";
     requestId: string;
     groupId: string;
     userId: string;
+    family_name: string;
+
   }) => void;
 }) => {
   const { id } = useParams();
@@ -59,6 +63,7 @@ export const MessageInterface = ({
     const groupDetails = await API.get<GroupDetails>({
       path: `/group/${groupId}`,
     });
+    console.log({ groupDetails });
     setGroupDetails(groupDetails);
     // get recent messages
     fetchMessages({});
@@ -118,6 +123,8 @@ export const MessageInterface = ({
       (jr) => jr.id === requestId
     );
     const request = groupDetails.joinRequests?.[requestIdx || 0];
+
+    console.log('THR REQUEST', request)
     if (!request) {
       return;
     }
@@ -126,8 +133,11 @@ export const MessageInterface = ({
       requestId,
       userId: request.userId,
       groupId: request.groupId,
+      family_name: request.family_name
     });
     let remainingInvites = groupDetails.joinRequests;
+
+    console.log({remainingInvites})
     remainingInvites?.splice(requestIdx || 0, 1);
     setGroupDetails({
       ...groupDetails,
@@ -135,13 +145,15 @@ export const MessageInterface = ({
     });
   };
 
+  console.log({ groupDetails });
+
   return (
     <div className="messageInterface">
       <div>
         <h2>{groupDetails.groupName}</h2>
         <div>
           {groupDetails.members.map((member, i) => (
-            <Avatar key={i} fullName={member.userName} />
+            <Avatar key={i} fullName={member.family_name} />
           ))}
           <JoinRequests
             joinRequests={groupDetails.joinRequests}
@@ -187,6 +199,7 @@ interface GroupDetails {
   members: {
     userId: string;
     userName: string;
+    family_name: string;
   }[];
 
   joinRequests?: {
@@ -194,6 +207,7 @@ interface GroupDetails {
     groupId: string;
     userName: string;
     id: string;
+    family_name: string;
   }[];
 }
 
